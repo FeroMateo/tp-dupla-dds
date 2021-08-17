@@ -1,2 +1,4 @@
 # tp-dupla-dds
-tp dupla
+  INTEGRANTES:
+  -MATEO RUIZ: 1688650
+  -BRUNO LOMBARDOZZI: 1680328

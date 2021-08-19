@@ -12,7 +12,7 @@ public class DatabaseController {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = null;
             conn = DriverManager.getConnection("jdbc:mysql://localhost/trabajodupla","root", "");
-            System.out.println("BASE CONECTADA PAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!");
+            System.out.println("BASE DE DATOS CONECTADA");
             return conn;
         }
         catch(Exception e) {

@@ -4,6 +4,7 @@ import com.sun.org.apache.xml.internal.dtm.ref.sax2dtm.SAX2DTM2;
 import domain.Productos.Producto;
 import Controladores.DatabaseController;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class Cliente {
 
     private Pedido pedidoActual;
-    private List<Pedido> historicoPedidos;
+    private List<Pedido> historicoPedidos = new ArrayList<Pedido>();
 
     public Pedido iniciarPedido()
     {
@@ -27,6 +28,7 @@ public class Cliente {
     public void confirmarCompra(Pedido pedido)
     {
         pedido.recibirPedido();
+        historicoPedidos.add(pedido);
     }
 
     public void comprarGolosinas()
@@ -34,9 +36,17 @@ public class Cliente {
         Pedido pedido = iniciarPedido();
         Producto golosina = new Producto();
         golosina.crearse("golosina",20,1);
+        Producto oreos = new Producto();
+        oreos.crearse("oreos",200,1);
+        Producto melba = new Producto();
+        melba.crearse("melba",20,1);
+        Producto rumba = new Producto();
+        rumba.crearse("rumba",20,1);
 
-        pedido.pruebaCompra(golosina);
-        //pedido.agregarProducto(golosina);
-        //confirmarCompra(pedido);
+        pedido.agregarProducto(golosina);
+        pedido.agregarProducto(oreos);
+        pedido.agregarProducto(melba);
+        pedido.agregarProducto(rumba);
+        confirmarCompra(pedido);
     }
 }

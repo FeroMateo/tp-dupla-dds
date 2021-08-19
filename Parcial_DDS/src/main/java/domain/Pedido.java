@@ -5,10 +5,11 @@ import domain.Productos.Producto;
 import domain.Publicaciones.Publicacion;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido {
-    public List<Producto> productos = null;
+    public List<Producto> productos = new ArrayList<Producto>();
     private Integer costoTotal;
     private Publicacion tipoPedido;
 
@@ -20,6 +21,7 @@ public class Pedido {
         if(productos.stream().allMatch(prod->controlador.hayStockDelProducto(con,prod)))
         {
             System.out.println("SE CONFIRMA EL PEDIDO");
+            confirmarPedido();
         }else
         {
            System.out.println("NO HAY STOCK PARA ESE PEDIDO");
@@ -28,6 +30,7 @@ public class Pedido {
     public void agregarProducto(Producto producto)
     {
         productos.add(producto);
+        System.out.println("SE AGREGO UN PRODUCTO");
     }
 
     public void pruebaCompra(Producto producto)

@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.util.List;
 
 public class Pedido {
-    List<Producto> productos;
+    public List<Producto> productos = null;
     private Integer costoTotal;
     private Publicacion tipoPedido;
 
@@ -29,6 +29,16 @@ public class Pedido {
     {
         productos.add(producto);
     }
+
+    public void pruebaCompra(Producto producto)
+    {
+        if (controlador.hayStockDelProducto(con,producto))
+        {
+            System.out.println("HAY STOCK Y SE CONFIRMA");
+            controlador.actualizarStockProducto(con,producto);
+        }
+    }
+
     public void confirmarPedido()
     {
         for(Producto prod: productos)

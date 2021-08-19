@@ -33,11 +33,10 @@ public class Cliente {
     {
         Pedido pedido = iniciarPedido();
         Producto golosina = new Producto();
-        golosina.nombre = "golosina";
-        golosina.cantidad = 20;
-        golosina.precio = 1;
+        golosina.crearse("golosina",20,1);
 
-        agregarProducto(pedido,golosina);
+        pedido.pruebaCompra(golosina);
+        //pedido.agregarProducto(golosina);
         //confirmarCompra(pedido);
     }
 }

@@ -1,4 +1,9 @@
 package Controladores;
 
-public class ControladorStock {
+public class ControladorStock
+{
+
+
+
+
 }

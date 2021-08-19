@@ -10,7 +10,7 @@ public abstract class PublicacionSimple {
   private List<Producto> listaDeProductos;
 
 
-    public Double costo(){
+    public Integer costo(){
         return productoUnico.getPrecio();
     }
 

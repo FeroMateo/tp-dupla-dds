@@ -8,7 +8,7 @@ import java.util.List;
 public class PublicacionCombo implements Publicacion{
 
      private List<Producto> productos = new ArrayList<Producto>();
-     Integer cantidadProductos = productos.size();
+     Integer cantidadProductos;
 
 
      public PublicacionCombo(List<Producto> listaProd){this.productos = listaProd;}
@@ -21,13 +21,13 @@ public class PublicacionCombo implements Publicacion{
 
      @Override
      public Integer costo(){
-
+    cantidadProductos = productos.size();
     if(cantidadProductos<=2){
          return sumaDeCostos();
     }else if(cantidadProductos>2 && cantidadProductos<=4){
-         return sumaDeCostos();// * 0.90;
+         return (int)(sumaDeCostos() * 0.90);
     }else{
-         return sumaDeCostos();// * 0.85;
+         return (int)(sumaDeCostos() * 0.85);
          }
      }
     @Override

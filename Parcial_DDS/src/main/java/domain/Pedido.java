@@ -41,6 +41,8 @@ public class Pedido {
         {
             System.out.println("SE CONFIRMA EL PEDIDO");
             confirmarPedido();
+            //NOTIFICAR CLIENTE Y REPARTIDOR
+
         }else
         {
            System.out.println("NO HAY STOCK PARA ESE PEDIDO");

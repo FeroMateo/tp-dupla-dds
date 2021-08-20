@@ -34,26 +34,22 @@ public class Cliente {
         pedido.recibirPedido();
         historicoPedidos.add(pedido);
     }
+    public Publicacion publicacionOreo(Integer cantidad)
+    {
+        Producto oreos = new Producto();
+        oreos.crearse("oreos",cantidad,100);
+        return new PublicacionSimple(oreos);
+    }
+
+    public void agregarPublicacionAPedido(Pedido pedido, Publicacion publicacion)
+    {
+        pedido.agregarPublicacion(publicacion);
+    }
 
     public void comprarGolosinas()
     {
         Pedido pedido = iniciarPedido();
-        Producto golosina = new Producto();
-        golosina.crearse("golosina",20,1);
-        Producto oreos = new Producto();
-        oreos.crearse("oreos",2,1);
-        Producto melba = new Producto();
-        melba.crearse("melba",2,1);
-        Producto rumba = new Producto();
-        rumba.crearse("rumba",2,1);
-
-        Publicacion publiRumbas = new PublicacionSimple(rumba);
-        Publicacion combo1 = new PublicacionCombo(Arrays.asList(oreos,melba));
-        Publicacion combo2 = new PublicacionCombo(Arrays.asList(melba,golosina,rumba));
-
-        pedido.agregarPublicacion(publiRumbas);
-        pedido.agregarPublicacion(combo1);
-        pedido.agregarPublicacion(combo2);
+        agregarPublicacionAPedido(pedido,publicacionOreo(20));
 
         confirmarCompra(pedido);
     }

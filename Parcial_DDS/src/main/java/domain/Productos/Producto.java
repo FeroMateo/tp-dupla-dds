@@ -11,7 +11,7 @@ public class Producto {
     public Integer getCantidad(){return cantidad;}
     public String getNombre() { return nombre; }
     public Integer getPrecio() {
-        return precio;
+        return precio * cantidad;
     }
 
     public void crearse(String name,Integer cant,Integer price)

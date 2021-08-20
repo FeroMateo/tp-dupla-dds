@@ -1,5 +1,6 @@
 package domain;
 
+import Controladores.ControladorNotificaciones;
 import Controladores.DatabaseController;
 import domain.Productos.Producto;
 import domain.Publicaciones.Publicacion;
@@ -12,6 +13,8 @@ public class Pedido {
     public List<Producto> productos = new ArrayList<Producto>();
     public List<Publicacion> publicaciones = new ArrayList<Publicacion>();
     private Integer costoTotal;
+
+    ControladorNotificaciones notificaciones = new ControladorNotificaciones();
 
     DatabaseController controlador = new DatabaseController();
     Connection con = controlador.conectarDataBase();
@@ -42,6 +45,8 @@ public class Pedido {
             System.out.println("SE CONFIRMA EL PEDIDO");
             confirmarPedido();
             //NOTIFICAR CLIENTE Y REPARTIDOR
+            notificaciones.notificarClienteWP(123);
+            notificaciones.notificarRepartidorWP("IRIGOYEN 463",123);
 
         }else
         {

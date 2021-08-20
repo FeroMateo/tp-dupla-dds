@@ -17,12 +17,15 @@ import java.util.List;
 
 public class Cliente {
 
+    private String direccion = "CALLE FALSA 123";
     private Pedido pedidoActual;
     private List<Pedido> historicoPedidos = new ArrayList<Pedido>();
 
     public Pedido iniciarPedido()
     {
-        return new Pedido();
+        Pedido pedido = new Pedido();
+        pedido.crearID_PEDIDO();
+        return pedido;
     }
     public void agregarProducto(Pedido pedido,Producto producto)
     {
@@ -31,7 +34,7 @@ public class Cliente {
 
     public void confirmarCompra(Pedido pedido)
     {
-        pedido.recibirPedido();
+        pedido.recibirPedido(direccion);
         historicoPedidos.add(pedido);
     }
     public Publicacion publicacionOreo(Integer cantidad)

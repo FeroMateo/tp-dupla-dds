@@ -67,7 +67,23 @@ public class DatabaseController {
         }
 
     }
+    public void cargarPedido(Connection connection,Integer id_pedido, Integer costo)
+    {
+     try {
+        Statement statement = connection.createStatement();
 
+        String sentencia = String.format("INSERT INTO `pedido` (`id_pedido`, `costo_total`) VALUES ('%d', '%d');",id_pedido,costo);
+
+        Integer funco =  statement.executeUpdate(sentencia);
+
+        System.out.println("SE CARGO EL PEDIDO");
+    }
+    catch (SQLException ex)
+    {
+        System.out.println("ERROR:"+ex);
+    }
+
+    }
     public void actualizarStockProducto(Connection connection,Producto prod)
     {
         String producto = prod.getNombre();

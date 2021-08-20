@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface Publicacion {
 
-    public Double costo();
+    public Integer costo();
     public List<Producto> getProductos();
 
 }

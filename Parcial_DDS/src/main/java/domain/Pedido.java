@@ -10,11 +10,30 @@ import java.util.List;
 
 public class Pedido {
     public List<Producto> productos = new ArrayList<Producto>();
+    public List<Publicacion> publicaciones = new ArrayList<Publicacion>();
     private Integer costoTotal;
-    private Publicacion tipoPedido;
 
     DatabaseController controlador = new DatabaseController();
     Connection con = controlador.conectarDataBase();
+
+    public void agregarProductosPublicacion(List<Producto> listaProductos)
+    {
+        for(Producto prod: listaProductos)
+        {
+            agregarProducto(prod);
+        }
+    }
+
+    public Integer costo()
+    {
+        Integer valorTotal = 0;
+        for (Publicacion pub: publicaciones)
+        {
+            valorTotal = valorTotal + pub.costo();
+        }
+        System.out.println(valorTotal);
+        return valorTotal;
+    }
 
     public void recibirPedido()
     {
@@ -27,19 +46,17 @@ public class Pedido {
            System.out.println("NO HAY STOCK PARA ESE PEDIDO");
         }
     }
+
+    public void agregarPublicacion(Publicacion publicacion)
+    {
+        publicaciones.add(publicacion);
+        agregarProductosPublicacion(publicacion.getProductos());
+    }
+
     public void agregarProducto(Producto producto)
     {
         productos.add(producto);
         System.out.println("SE AGREGO UN PRODUCTO");
-    }
-
-    public void pruebaCompra(Producto producto)
-    {
-        if (controlador.hayStockDelProducto(con,producto))
-        {
-            System.out.println("HAY STOCK Y SE CONFIRMA");
-            controlador.actualizarStockProducto(con,producto);
-        }
     }
 
     public void confirmarPedido()
@@ -48,9 +65,6 @@ public class Pedido {
         {
             controlador.actualizarStockProducto(con,prod);
         }
-    }
-
-    public void setProductos() {
-        tipoPedido.getProductos();
+        this.costoTotal = costo();
     }
 }

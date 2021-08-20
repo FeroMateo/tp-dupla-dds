@@ -3,8 +3,12 @@ import com.sun.java.swing.plaf.windows.WindowsIconFactory;
 import com.sun.org.apache.xml.internal.dtm.ref.sax2dtm.SAX2DTM2;
 import domain.Productos.Producto;
 import Controladores.DatabaseController;
+import domain.Publicaciones.Publicacion;
+import domain.Publicaciones.PublicacionCombo;
+import domain.Publicaciones.PublicacionSimple;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -37,16 +41,20 @@ public class Cliente {
         Producto golosina = new Producto();
         golosina.crearse("golosina",20,1);
         Producto oreos = new Producto();
-        oreos.crearse("oreos",200,1);
+        oreos.crearse("oreos",2,1);
         Producto melba = new Producto();
-        melba.crearse("melba",20,1);
+        melba.crearse("melba",2,1);
         Producto rumba = new Producto();
-        rumba.crearse("rumba",20,1);
+        rumba.crearse("rumba",2,1);
 
-        pedido.agregarProducto(golosina);
-        pedido.agregarProducto(oreos);
-        pedido.agregarProducto(melba);
-        pedido.agregarProducto(rumba);
+        Publicacion publiRumbas = new PublicacionSimple(rumba);
+        Publicacion combo1 = new PublicacionCombo(Arrays.asList(oreos,melba));
+        Publicacion combo2 = new PublicacionCombo(Arrays.asList(melba,golosina,rumba));
+
+        pedido.agregarPublicacion(publiRumbas);
+        pedido.agregarPublicacion(combo1);
+        pedido.agregarPublicacion(combo2);
+
         confirmarCompra(pedido);
     }
 }

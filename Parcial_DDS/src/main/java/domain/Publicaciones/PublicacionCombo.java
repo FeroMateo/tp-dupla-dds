@@ -2,29 +2,32 @@ package domain.Publicaciones;
 
 import domain.Productos.Producto;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public abstract class PublicacionCombo implements Publicacion{
+public class PublicacionCombo implements Publicacion{
 
-     private List<Producto> productos;
+     private List<Producto> productos = new ArrayList<Producto>();
      Integer cantidadProductos = productos.size();
 
 
-     public Double sumaDeCostos(){
+     public PublicacionCombo(List<Producto> listaProd){this.productos = listaProd;}
+
+     public Integer sumaDeCostos(){
           return productos.stream()
-                  .mapToDouble(producto -> producto.getPrecio())
+                  .mapToInt(producto -> producto.getPrecio())
                   .sum();
      }
 
      @Override
-     public Double costo(){
+     public Integer costo(){
 
     if(cantidadProductos<=2){
          return sumaDeCostos();
     }else if(cantidadProductos>2 && cantidadProductos<=4){
-         return sumaDeCostos() * 0.90;
+         return sumaDeCostos();// * 0.90;
     }else{
-         return sumaDeCostos() * 0.85;
+         return sumaDeCostos();// * 0.85;
          }
      }
     @Override

@@ -1,7 +1,6 @@
 package domain;
 
-import Controladores.ControladorNotificaciones;
-import Controladores.DatabaseController;
+import Controladores.*;
 import domain.Productos.Producto;
 import domain.Publicaciones.Publicacion;
 
@@ -16,11 +15,16 @@ public class Pedido {
     public List<Publicacion> publicaciones = new ArrayList<Publicacion>();
     private Integer costoTotal;
     private Integer id_pedido;
+    private ObserverProveedor observador;
+    private Cliente cliente;
 
     ControladorNotificaciones notificaciones = new ControladorNotificaciones();
 
+    ControladorDelivery controladorDelivery = new ControladorDelivery();
+
     DatabaseController controlador = new DatabaseController();
     Connection con = controlador.conectarDataBase();
+
 
     public Integer crearID_PEDIDO()
     {
@@ -63,6 +67,15 @@ public class Pedido {
         }else
         {
            System.out.println("NO HAY STOCK PARA ESE PEDIDO");
+
+
+            //Se le avisa al proveedor el/los productos a recomponer,cantidad, etc.
+
+            List<Producto> productosSinStock = (List<Producto>) productos
+                    .stream()
+                    .filter(producto -> !controlador.hayStockDelProducto(con,producto));
+
+            observador.notificarProv(productosSinStock,notificaciones);
         }
     }
 
@@ -72,10 +85,9 @@ public class Pedido {
         agregarProductosPublicacion(publicacion.getProductos());
     }
 
-    public void agregarProducto(Producto producto)
-    {
-        productos.add(producto);
-        System.out.println("SE AGREGO UN PRODUCTO");
+    public void agregarProducto(Producto producto) {
+      productos.add(producto);
+      System.out.println("SE AGREGO UN PRODUCTO");
     }
 
     public void confirmarPedido()
@@ -87,5 +99,6 @@ public class Pedido {
         this.costoTotal = costo();
 
         controlador.cargarPedido(con,this.id_pedido,this.costoTotal);
+        controladorDelivery.confirmarDelivery(notificaciones,cliente.direccion,this.id_pedido);
     }
 }

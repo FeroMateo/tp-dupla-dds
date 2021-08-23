@@ -4,13 +4,13 @@ import java.security.SecureRandom;
 
 public class Producto {
 
-    private String nombre;
-    private Integer precio;
-    private Integer cantidad;
+    public String nombre;
+    public Integer precio;
+    public Integer cantidad;
 
     public Integer getCantidad(){return cantidad;}
     public String getNombre() { return nombre; }
-    public Integer getPrecio() {
+    public Integer precio() {
         return precio * cantidad;
     }
 

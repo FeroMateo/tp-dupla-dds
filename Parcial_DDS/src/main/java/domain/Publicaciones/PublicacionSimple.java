@@ -13,7 +13,7 @@ public class PublicacionSimple implements Publicacion{
 
     @Override
     public Integer costo(){
-        return productoUnico.getPrecio();
+        return productoUnico.precio();
     }
     @Override
     public List<Producto> getProductos() {

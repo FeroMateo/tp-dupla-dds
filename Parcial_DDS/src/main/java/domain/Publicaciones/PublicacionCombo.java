@@ -15,7 +15,7 @@ public class PublicacionCombo implements Publicacion{
 
      public Integer sumaDeCostos(){
           return productos.stream()
-                  .mapToInt(producto -> producto.getPrecio())
+                  .mapToInt(producto -> producto.precio())
                   .sum();
      }
 

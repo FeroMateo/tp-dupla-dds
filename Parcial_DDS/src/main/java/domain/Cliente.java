@@ -13,11 +13,9 @@ import java.util.Date;
 import java.util.List;
 
 
-
-
 public class Cliente {
 
-    private String direccion = "CALLE FALSA 123";
+    public String direccion = "CALLE FALSA 123";
     private Pedido pedidoActual;
     private List<Pedido> historicoPedidos = new ArrayList<Pedido>();
 
@@ -32,11 +30,18 @@ public class Cliente {
         pedido.agregarProducto(producto);
     }
 
+
+
+
     public void confirmarCompra(Pedido pedido)
     {
         pedido.recibirPedido(direccion);
         historicoPedidos.add(pedido);
     }
+
+
+
+
     public Publicacion publicacionOreo(Integer cantidad)
     {
         Producto oreos = new Producto();

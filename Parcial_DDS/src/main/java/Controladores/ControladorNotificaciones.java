@@ -3,6 +3,7 @@ package Controladores;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
+import domain.Productos.Producto;
 
 public class ControladorNotificaciones {
     // Find your Account SID and Auth Token at twilio.com/console
@@ -52,6 +53,20 @@ public class ControladorNotificaciones {
     public void notificarRepartidorWP(String direccion,Integer id_pedido){
 
         String mensaje = String.format("ENVIAR PEDIDO %d A %s EN MENOS DE 10 MINUTOS",id_pedido,direccion);
+
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        Message message = Message.creator(
+                new com.twilio.type.PhoneNumber("whatsapp:+5491123732266"),
+                new com.twilio.type.PhoneNumber("whatsapp:+14155238886"),
+                mensaje)
+                .create();
+
+        //System.out.println(message.getSid());
+    }
+
+    public void notificarProveedorWP(Producto producto){
+
+        String mensaje = String.format("Hola, necesitamos 5 unidades de %s ",producto.getNombre());
 
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message message = Message.creator(

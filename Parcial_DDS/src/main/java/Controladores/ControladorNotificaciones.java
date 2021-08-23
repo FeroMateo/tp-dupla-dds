@@ -9,7 +9,7 @@ public class ControladorNotificaciones {
     // Find your Account SID and Auth Token at twilio.com/console
     // and set the environment variables. See http://twil.io/secure
     public static final String ACCOUNT_SID = "AC41023bd65e9f12d9ae58b997b747c989";
-    public static final String AUTH_TOKEN = "c829bac4037cd46ff78b73611a4997d9";
+    public static final String AUTH_TOKEN = "9f0177019bca7d46ebba123c211679e6";
 
     public void notificarClienteSMS(Integer id_pedido){
 

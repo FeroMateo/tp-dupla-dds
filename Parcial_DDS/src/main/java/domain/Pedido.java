@@ -3,6 +3,7 @@ package domain;
 import Controladores.*;
 import domain.Productos.Producto;
 import domain.Publicaciones.Publicacion;
+import org.codehaus.jackson.map.util.ClassUtil;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -26,12 +27,14 @@ public class Pedido {
     Connection con = controlador.conectarDataBase();
 
 
-    public Integer crearID_PEDIDO()
+    public Integer crearID_PEDIDO(Cliente cli)
     {
         Random random = new Random();
         int numero = random.nextInt(100000);
         this.id_pedido = numero;
         System.out.println(numero);
+
+        this.cliente = cli;
         return numero;
     }
 
@@ -61,8 +64,8 @@ public class Pedido {
             System.out.println("SE CONFIRMA EL PEDIDO");
             confirmarPedido();
             //NOTIFICAR CLIENTE Y REPARTIDOR
-            notificaciones.notificarClienteWP(this.id_pedido);
-            notificaciones.notificarRepartidorWP(direccion,this.id_pedido);
+            notificaciones.notificarClienteSMS(this.id_pedido);
+            notificaciones.notificarRepartidorSMS(direccion,this.id_pedido);
 
         }else
         {
@@ -99,6 +102,8 @@ public class Pedido {
         this.costoTotal = costo();
 
         controlador.cargarPedido(con,this.id_pedido,this.costoTotal);
+
+        controladorDelivery.instanciarDeliverys();
         controladorDelivery.confirmarDelivery(notificaciones,cliente.direccion,this.id_pedido);
     }
 }

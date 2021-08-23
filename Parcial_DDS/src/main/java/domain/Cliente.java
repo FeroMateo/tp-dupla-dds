@@ -22,7 +22,7 @@ public class Cliente {
     public Pedido iniciarPedido()
     {
         Pedido pedido = new Pedido();
-        pedido.crearID_PEDIDO();
+        pedido.crearID_PEDIDO(this);
         return pedido;
     }
     public void agregarProducto(Pedido pedido,Producto producto)
@@ -40,13 +40,18 @@ public class Cliente {
     }
 
 
-
-
     public Publicacion publicacionOreo(Integer cantidad)
     {
         Producto oreos = new Producto();
         oreos.crearse("oreos",cantidad,100);
         return new PublicacionSimple(oreos);
+    }
+
+    public Publicacion publicacionMelba(Integer cantidad)
+    {
+        Producto melba = new Producto();
+        melba.crearse("oreos",cantidad,100);
+        return new PublicacionSimple(melba);
     }
 
     public void agregarPublicacionAPedido(Pedido pedido, Publicacion publicacion)
@@ -58,6 +63,7 @@ public class Cliente {
     {
         Pedido pedido = iniciarPedido();
         agregarPublicacionAPedido(pedido,publicacionOreo(20));
+        agregarPublicacionAPedido(pedido,publicacionMelba(20));
 
         confirmarCompra(pedido);
     }

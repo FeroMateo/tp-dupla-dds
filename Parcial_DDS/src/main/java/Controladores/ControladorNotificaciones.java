@@ -24,13 +24,14 @@ public class ControladorNotificaciones {
 
         //System.out.println(message.getSid());
     }
-    public void notificarRepartidorSMS(String direccion,Integer id_pedido){
+    public void notificarRepartidorSMS(String direccion,Integer id_pedido,String numero){
 
+        String numero_spliteado = String.format("+54%s",numero);
         String mensaje = String.format("ENVIAR PEDIDO %d A %s EN MENOS DE 10 MINUTOS",id_pedido,direccion);
 
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message message = Message.creator(
-                new com.twilio.type.PhoneNumber("+541123732266"),
+                new com.twilio.type.PhoneNumber(numero_spliteado),
                 new com.twilio.type.PhoneNumber("+19713512077"),
                 mensaje)
                 .create();
@@ -50,13 +51,14 @@ public class ControladorNotificaciones {
 
         //System.out.println(message.getSid());
     }
-    public void notificarRepartidorWP(String direccion,Integer id_pedido){
+    public void notificarRepartidorWP(String direccion,Integer id_pedido,String numero){
 
+        String numero_spliteado = String.format("whatsapp:+549%s",numero);
         String mensaje = String.format("ENVIAR PEDIDO %d A %s EN MENOS DE 10 MINUTOS",id_pedido,direccion);
 
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message message = Message.creator(
-                new com.twilio.type.PhoneNumber("whatsapp:+5491123732266"),
+                new com.twilio.type.PhoneNumber(numero_spliteado),
                 new com.twilio.type.PhoneNumber("whatsapp:+14155238886"),
                 mensaje)
                 .create();
@@ -66,13 +68,13 @@ public class ControladorNotificaciones {
 
 //NOTIFICACIONES PROVEEDOR
 
-    public void notificarProveedorWP(Producto producto){
+    public void notificarProveedorWP(){
 
-        String mensaje = String.format("Hola, necesitamos 5 unidades de %s ",producto.getNombre());
+        String mensaje = String.format("Hola, necesitamos que se comuniquen con nosotros para agregar STOCK, DulceDeliver.");
 
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message message = Message.creator(
-                new com.twilio.type.PhoneNumber("whatsapp:+5491123732266"),
+                new com.twilio.type.PhoneNumber("whatsapp:+5491132027257"),
                 new com.twilio.type.PhoneNumber("whatsapp:+14155238886"),
                 mensaje)
                 .create();
@@ -80,9 +82,9 @@ public class ControladorNotificaciones {
         //System.out.println(message.getSid());
     }
 
-    public void notificarProveedorSMS(Producto producto){
+    public void notificarProveedorSMS(){
 
-        String mensaje = String.format("Hola, necesitamos 5 unidades de %s ",producto.getNombre());
+        String mensaje = String.format("Hola, necesitamos que se comuniquen con nosotros para agregar STOCK, DulceDeliver.");
 
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message message = Message.creator(

@@ -9,14 +9,13 @@ import java.util.List;
 public class ControladorDelivery {
 
     private List<Repartidor> deliverys = new ArrayList<Repartidor>();
-    private List<Repartidor> deliverysDisponibles = new ArrayList<Repartidor>();
 
     public void instanciarDeliverys()
     {
         Repartidor mateo = new Repartidor();
-        mateo.Repartidor(new Disponible());
+        mateo.Repartidor(new Viajando(),"1123732266");
         Repartidor bruno = new Repartidor();
-        bruno.Repartidor(new Viajando());
+        bruno.Repartidor(new Disponible(),"1132027257");
 
         deliverys.add(mateo);
         deliverys.add(bruno);
@@ -26,8 +25,14 @@ public class ControladorDelivery {
 
     public void confirmarDelivery(ControladorNotificaciones controlNotific,String ubicacion,Integer id_pedido){
 
-        //deliverysDisponibles = (List<Repartidor>) deliverys.stream().filter(repartidor -> repartidor.estado.confirmarDisponibilidad());
-
-        controlNotific.notificarRepartidorWP(ubicacion,id_pedido);
+        for(Repartidor repartidor: deliverys)
+        {
+            if(repartidor.estado.confirmarDisponibilidad())
+            {
+                System.out.println(repartidor.telefono);
+                controlNotific.notificarRepartidorWP(ubicacion,id_pedido,repartidor.telefono);
+                break;
+            }
+        }
     }
 }

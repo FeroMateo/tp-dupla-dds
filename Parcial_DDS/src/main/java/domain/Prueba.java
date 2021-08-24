@@ -1,8 +1,5 @@
 package domain;
 
-import domain.Repartidores.Disponibilidad.Disponible;
-import domain.Repartidores.Disponibilidad.Viajando;
-import domain.Repartidores.Repartidor;
 
 public class Prueba
 {

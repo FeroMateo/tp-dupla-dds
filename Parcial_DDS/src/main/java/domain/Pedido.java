@@ -17,20 +17,25 @@ public class Pedido {
     private Integer costoTotal;
     private Integer id_pedido;
     private Cliente cliente;
-    public Boolean noHayStock=false;
+    public Boolean noHayStock = false;
 
     ObserverProveedor observador = new ObserverProveedor();
-
 
     ControladorNotificaciones notificaciones = new ControladorNotificaciones();
 
     ControladorDelivery controladorDelivery = new ControladorDelivery();
 
     DatabaseController controlador = new DatabaseController();
+
     Connection con = controlador.conectarDataBase();
 
+    public Boolean consultarSiReponerStock()
+    {
+        Boolean resultado = this.noHayStock;
+        return resultado;
+    }
     public void seContactoConProveedor(){
-        this.noHayStock = false;
+        noHayStock = false;
     }
 
     public Integer crearID_PEDIDO(Cliente cli)
@@ -39,7 +44,8 @@ public class Pedido {
         int numero = random.nextInt(100000);
         this.id_pedido = numero;
         System.out.println(numero);
-        this.observador.setObservador(this);
+
+        this.observador.iniciarObserver(this,notificaciones);
         this.cliente = cli;
         return numero;
     }
@@ -63,20 +69,20 @@ public class Pedido {
         return valorTotal;
     }
 
-    public void recibirPedido(String direccion)
+    public void recibirPedido()
     {
         if(productos.stream().allMatch(prod->controlador.hayStockDelProducto(con,prod)))
         {
             System.out.println("SE CONFIRMA EL PEDIDO");
             confirmarPedido();
-            //NOTIFICAR CLIENTE Y REPARTIDOR
-            notificaciones.notificarClienteSMS(this.id_pedido);
-            notificaciones.notificarRepartidorSMS(direccion,this.id_pedido);
+
+            notificaciones.notificarClienteWP(this.id_pedido);
 
         }else
         {
            System.out.println("NO HAY STOCK PARA ESE PEDIDO");
-            noHayStock=true;
+
+            noHayStock = true;
         }
     }
 

@@ -1,7 +1,6 @@
 package domain;
 import Controladores.ObserverProveedor;
-import com.sun.java.swing.plaf.windows.WindowsIconFactory;
-import com.sun.org.apache.xml.internal.dtm.ref.sax2dtm.SAX2DTM2;
+
 import domain.Productos.Producto;
 import Controladores.DatabaseController;
 import domain.Publicaciones.Publicacion;
@@ -37,7 +36,7 @@ public class Cliente {
 
     public void confirmarCompra(Pedido pedido)
     {
-        pedido.recibirPedido(direccion);
+        pedido.recibirPedido();
         historicoPedidos.add(pedido);
     }
 
@@ -52,7 +51,7 @@ public class Cliente {
     public Publicacion publicacionMelba(Integer cantidad)
     {
         Producto melba = new Producto();
-        melba.crearse("oreos",cantidad,100);
+        melba.crearse("melba",cantidad,50);
         return new PublicacionSimple(melba);
     }
 
@@ -64,11 +63,9 @@ public class Cliente {
     public void comprarGolosinas()
     {
         Pedido pedido = iniciarPedido();
-        ObserverProveedor observador = new ObserverProveedor();
-        observador.setObservador(pedido);
 
         agregarPublicacionAPedido(pedido,publicacionOreo(20));
-        agregarPublicacionAPedido(pedido,publicacionMelba(20));
+        agregarPublicacionAPedido(pedido,publicacionMelba(10));
 
         confirmarCompra(pedido);
     }

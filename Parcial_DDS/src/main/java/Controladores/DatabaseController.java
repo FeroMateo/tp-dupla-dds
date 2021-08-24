@@ -36,6 +36,8 @@ public class DatabaseController {
         }
 
     }
+
+
     public Boolean hayStockDelProducto(Connection connection, Producto prod)
     {
         String producto = prod.getNombre();
@@ -67,6 +69,8 @@ public class DatabaseController {
         }
 
     }
+
+
     public void cargarPedido(Connection connection,Integer id_pedido, Integer costo)
     {
      try {
@@ -82,8 +86,8 @@ public class DatabaseController {
     {
         System.out.println("ERROR:"+ex);
     }
-
     }
+
     public void actualizarStockProducto(Connection connection,Producto prod)
     {
         String producto = prod.getNombre();

@@ -16,8 +16,11 @@ public class Pedido {
     public List<Publicacion> publicaciones = new ArrayList<Publicacion>();
     private Integer costoTotal;
     private Integer id_pedido;
-    private ObserverProveedor observador;
     private Cliente cliente;
+    public Boolean noHayStock=false;
+
+    ObserverProveedor observador = new ObserverProveedor();
+
 
     ControladorNotificaciones notificaciones = new ControladorNotificaciones();
 
@@ -26,6 +29,9 @@ public class Pedido {
     DatabaseController controlador = new DatabaseController();
     Connection con = controlador.conectarDataBase();
 
+    public void seContactoConProveedor(){
+        this.noHayStock = false;
+    }
 
     public Integer crearID_PEDIDO(Cliente cli)
     {
@@ -33,7 +39,7 @@ public class Pedido {
         int numero = random.nextInt(100000);
         this.id_pedido = numero;
         System.out.println(numero);
-
+        this.observador.setObservador(this);
         this.cliente = cli;
         return numero;
     }
@@ -70,15 +76,7 @@ public class Pedido {
         }else
         {
            System.out.println("NO HAY STOCK PARA ESE PEDIDO");
-
-
-            //Se le avisa al proveedor el/los productos a recomponer,cantidad, etc.
-
-            List<Producto> productosSinStock = (List<Producto>) productos
-                    .stream()
-                    .filter(producto -> !controlador.hayStockDelProducto(con,producto));
-
-            observador.notificarProv(productosSinStock,notificaciones);
+            noHayStock=true;
         }
     }
 

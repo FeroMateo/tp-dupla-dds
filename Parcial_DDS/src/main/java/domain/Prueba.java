@@ -11,5 +11,6 @@ public class Prueba
 
         Cliente cliente = new Cliente();
         cliente.comprarGolosinas();
+
     }
 }

@@ -1,4 +1,5 @@
 package domain;
+import Controladores.ObserverProveedor;
 import com.sun.java.swing.plaf.windows.WindowsIconFactory;
 import com.sun.org.apache.xml.internal.dtm.ref.sax2dtm.SAX2DTM2;
 import domain.Productos.Producto;
@@ -25,6 +26,7 @@ public class Cliente {
         pedido.crearID_PEDIDO(this);
         return pedido;
     }
+
     public void agregarProducto(Pedido pedido,Producto producto)
     {
         pedido.agregarProducto(producto);
@@ -62,6 +64,9 @@ public class Cliente {
     public void comprarGolosinas()
     {
         Pedido pedido = iniciarPedido();
+        ObserverProveedor observador = new ObserverProveedor();
+        observador.setObservador(pedido);
+
         agregarPublicacionAPedido(pedido,publicacionOreo(20));
         agregarPublicacionAPedido(pedido,publicacionMelba(20));
 

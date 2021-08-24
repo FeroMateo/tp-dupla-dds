@@ -6,8 +6,6 @@ import domain.Repartidores.Disponibilidad.NoDisponible;
 
 public class Repartidor {
     public Disponibilidad estado;
-    public  Pedido pedido;
-
 
     public void Repartidor(Disponibilidad disponibilidad)
     {
